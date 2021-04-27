@@ -1,4 +1,7 @@
+from SetUpError import SetUpError
+from TearDownError import TearDownError
 from TestCase import TestCase
+from TestResult import TestResult
 from WasRun import WasRun
 
 
@@ -13,12 +16,31 @@ class TestCaseTest(TestCase):
         result = test.run()
         assert "1 run, 0 failed" == result.summary()
 
+    def testSetUpFailedResult(self):
+        test = SetUpError("testMethod")
+        result = test.run()
+        assert "1 run, 1 failed" == result.summary()
+
     def testFailedResult(self):
         test = WasRun("testBrokenMethod")
         result = test.run()
         assert "1 run, 1 failed" == result.summary()
 
+    def testFailedResultFormatting(self):
+        result = TestResult()
+        result.testStarted()
+        result.testFailed()
+        assert "1 run, 1 failed" == result.summary()
 
-TestCaseTest("testTemplateMethod").run()
-TestCaseTest("testResult").run()
-#TestCaseTest("testFailedResult").run()
+    def testTearDownFailedResult(self):
+        test = TearDownError("testMethod")
+        result = test.run()
+        assert "1 run, 1 failed" == result.summary()
+
+
+TestCaseTest("").testTemplateMethod()
+TestCaseTest("").testResult()
+TestCaseTest("").testSetUpFailedResult()
+TestCaseTest("").testFailedResult()
+TestCaseTest("").testFailedResultFormatting()
+TestCaseTest("").testTearDownFailedResult()

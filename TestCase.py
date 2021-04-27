@@ -11,10 +11,13 @@ class TestCase:
     def run(self):
         result = TestResult()
         result.testStarted()
-        self.setUp()
-        method = getattr(self, self.name)
-        method()
-        self.tearDown()
+        try:
+            self.setUp()
+            method = getattr(self, self.name)
+            method()
+            self.tearDown()
+        except:
+            result.testFailed()
         return result
 
     def tearDown(self):

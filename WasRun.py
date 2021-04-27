@@ -2,6 +2,10 @@ from TestCase import TestCase
 
 
 class WasRun(TestCase):
+    def __init__(self, name):
+        self.log = ""
+        TestCase.__init__(self, name)
+
     def setUp(self):
         self.log = "setUp "
 
