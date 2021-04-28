@@ -12,8 +12,8 @@ class TestCase:
             method = getattr(self, self.name)
             method()
             self.tearDown()
-        except:
-            result.testFailed()
+        except Exception as e:
+            result.testFailed(self, e)
 
     def tearDown(self):
         pass
