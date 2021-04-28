@@ -3,6 +3,7 @@ from TearDownError import TearDownError
 from TestCase import TestCase
 from TestResult import TestResult
 from TestSuite import TestSuite
+from TestSuiteComposite import TestSuiteComposite
 from WasRun import WasRun
 
 
@@ -56,6 +57,13 @@ class TestCaseTest(TestCase):
         assert "3 run, 2 failed, SetUpError.testMethod-ZeroDivisionError, SetUpError.testBrokenMethod-ValueError" == \
                self.result.summary()
 
+    def testSuiteComposite(self):
+        suite = TestSuiteComposite()
+        suite.add(WasRun(""))
+        suite.run(self.result)
+        assert "2 run, 1 failed, WasRun.testBrokenMethod-Exception" == \
+               self.result.summary()
+
 
 suite = TestSuite()
 suite.add(TestCaseTest("testTemplateMethod"))
@@ -66,6 +74,7 @@ suite.add(TestCaseTest("testFailedResultFormatting"))
 suite.add(TestCaseTest("testTearDownFailedResult"))
 suite.add(TestCaseTest("testSuite"))
 suite.add(TestCaseTest("testSetUpErrorsReport"))
+suite.add(TestCaseTest("testSuiteComposite"))
 
 result = TestResult()
 suite.run(result)
