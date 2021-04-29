@@ -59,22 +59,14 @@ class TestCaseTest(TestCase):
 
     def testSuiteComposite(self):
         suite = TestSuiteComposite()
-        suite.add(WasRun(""))
+        suite.add(WasRun())
         suite.run(self.result)
         assert "2 run, 1 failed, WasRun.testBrokenMethod-Exception" == \
                self.result.summary()
 
 
-suite = TestSuite()
-suite.add(TestCaseTest("testTemplateMethod"))
-suite.add(TestCaseTest("testResult"))
-suite.add(TestCaseTest("testSetUpFailedResult"))
-suite.add(TestCaseTest("testFailedResult"))
-suite.add(TestCaseTest("testFailedResultFormatting"))
-suite.add(TestCaseTest("testTearDownFailedResult"))
-suite.add(TestCaseTest("testSuite"))
-suite.add(TestCaseTest("testSetUpErrorsReport"))
-suite.add(TestCaseTest("testSuiteComposite"))
+suite = TestSuiteComposite()
+suite.add(TestCaseTest(""))
 
 result = TestResult()
 suite.run(result)

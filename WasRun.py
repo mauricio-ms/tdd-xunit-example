@@ -2,7 +2,7 @@ from TestCase import TestCase
 
 
 class WasRun(TestCase):
-    def __init__(self, name):
+    def __init__(self, name=""):
         self.log = ""
         TestCase.__init__(self, name)
 
@@ -17,4 +17,3 @@ class WasRun(TestCase):
 
     def tearDown(self):
         self.log = self.log + "tearDown "
-
